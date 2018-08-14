@@ -1,0 +1,52 @@
+--- /home/waltms/KDphilominedivload.pl	2010-04-28 19:30:54.000000000 -0500
++++ /var/lib/philologic31/databases/GreekDrama/philomineload/KDphilominedivload.pl	2018-08-13 16:55:31.207166845 -0500
+@@ -20,11 +20,11 @@
+ elsif ($dblang eq "-greek") {
+ 	use DBI;		    # Set on off....
+ 	$greekflag = 1;
+-    $dsn = "dbi:mysql:perseus:localhost";
+-	$user = "perseus";
++    $dsn = "dbi:mysql:philologic:localhost";
++	$user = "philologic";
+ 	$pw = "martini";
+ 	#	Location of the sqlite greek lexicon database if loaded greektexts
+-	$greekdb = "/Library/WebServer/Lexica/GreekLexicon.db";
++	$greekdb = "/var/www/artflsrv02/cgi-bin/perseus/GreekLexicon.db";
+ }
+ else {
+ 	print "Usage: philominedivload -english/-french -0.01 \n";
+@@ -316,6 +316,7 @@
+ 	local ($secondword, $thisfile, $fsize1, $fsize2);
+ 	$list = $_[0];
+ 	$type = $_[1];
++#	print $list;
+ 	$span = 2;
+ 	if ($type eq "bigrams" || $type eq "bilemmas") {
+ 		$span = 2;
+@@ -492,7 +493,7 @@
+ 	$dbh = DBI->connect("DBI:SQLite:dbname=$greekdb", '','', {AutoCommit , 1}) or die "ACK: couldn't connect to sqlite - $!";
+ 	print "In getlemmas, using range $greekstartid - $greekendid\n";
+ 	foreach ($id=$greekstartid; $id<=$greekendid; $id++) {
+-		print "Foreach getlemmas loop, id is $id\n";
++#		print "Foreach getlemmas loop, id is $id\n";
+ 		$lemme = &LemmaFinder($id);
+ 		if ($lemme) {
+ 			$rtn .= $lemme . "\n";
+@@ -595,7 +596,7 @@
+ 		$greekendid=0;
+ 	}
+ #	print $w . "\n";
+-	($DIVIDENTIFIER, $wordsinobject) = split("\t", $w);
++	($DIVIDENTIFIER, $wordsinobject) = split("\t", $w, 2);
+ 	print "IDS: $greekstartid - $greekendid\n";
+ 	$wordsinobject =~ s/<NEWLINE>/\n/g;
+         $wordsinobject = charents2utf8($wordsinobject);
+@@ -770,7 +771,7 @@
+ 	my $parse = $parsequery->fetchrow_hashref();
+ 	if ($parse->{lex}){
+ 		$lexid = $parse->{lex};
+-		$lemmaquery = $dbh->prepare("select lemma from Lexicon where id=\"$lexid\";");
++		$lemmaquery = $dbh->prepare("select lemma from Lexicon where lexid=\"$lexid\";");
+ 		$lemmaquery->execute();
+ 		$lemma = $lemmaquery->fetchrow_array();	
+ 	}

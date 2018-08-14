@@ -1,0 +1,360 @@
+diff -aur ../philomine2/cgi-bin/config.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/config.pl
+--- ../philomine2/cgi-bin/config.pl	2008-06-13 16:58:08.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/config.pl	2018-07-30 15:34:07.897618391 -0500
+@@ -4,15 +4,15 @@
+ use DBI;
+ 
+ # PHILOLOGIC CONFIG
+-$PHILOSITECFG = "/etc/philologic";
++$PHILOSITECFG = "/etc/philologic31";
+ do "$PHILOSITECFG/dbnames";
+-do "$PHILOSITECFG/philologic.cfg";
++do "$PHILOSITECFG/philologic31.cfg";
+ 
+ # PHILOMINE CONFIG
+-require "/etc/philologic/philomine.cfg";
++require "/etc/philologic31/philomine.cfg";
+ 
+ # MYSQL CONFIG
+-$dbh = DBI->connect("DBI:mysql:$MYSQLDB", $MYSQLUSER, $MYSQLPASS);
++$dbh = DBI->connect("DBI:mysql:$MYSQLDB;mysql_socket=/var/lib/mysql/mysql.sock", $MYSQLUSER, $MYSQLPASS);
+ 
+ # Available featuresets
+ @featuresets = ('SURFACE', 'LEMMA', 'BILEMMA', 'BIGRAM');
+diff -aur ../philomine2/cgi-bin/feature_functions.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/feature_functions.pl
+--- ../philomine2/cgi-bin/feature_functions.pl	2008-06-16 12:19:51.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/feature_functions.pl	2018-08-11 17:00:34.448296712 -0500
+@@ -29,7 +29,7 @@
+ ################################################################################
+ sub getAndFilterFeatures() {
+ 	
+-	my $debug = 50;
++	my $debug = 99;
+ 	
+ 	my $params = $_[0];
+ 	my $instances = $_[1];
+diff -aur ../philomine2/cgi-bin/form_components/form_functions.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/form_components/form_functions.pl
+--- ../philomine2/cgi-bin/form_components/form_functions.pl	2008-06-13 16:03:15.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/form_components/form_functions.pl	2018-07-30 19:23:21.220967984 -0500
+@@ -32,7 +32,7 @@
+ 
+ sub corporaSettings() {
+ 
+-	my $debug = 0;
++	my $debug = 99;
+ 
+ 	my $params = $_[0];
+ 	
+@@ -81,7 +81,7 @@
+ 
+ sub corpusSettings() {
+ 	
+-	my $debug = 0;
++	my $debug = 99;
+ 
+ 	my $params = $_[0];
+ 	my $corpus_id = $_[1];
+@@ -175,7 +175,7 @@
+ 
+ sub taskSelect() {
+ 	
+-	my $debug = 0;
++	my $debug = 99;
+ 	
+ 	my $params = $_[0];
+ 	
+@@ -310,14 +310,17 @@
+ 	
+ 	my $dbname = $params->{'c' . $corpus_id . '_dbname'};
+ 	
+-	&bugger($debug, "DBNAME: $dbanme<br>");
++	&bugger($debug, "DBNAME: $dbname<br>");
+ 	
+ 	my $output = '<select name="c' . $corpus_id . '_dbname" id="c' . $corpus_id . '_dbname" class="dbnameselect"><option value="">Select...</option>' . "\n";
+ 	
+ 	# Go through the PhiloLogic install directory and print a select
+ 	# option for each database that has a philominesubs.pl in /lib
+-	
++
++	&bugger($debug, "PHILODATADIR: $PHILODATADIR<br>");
++
+ 	opendir(DIR, "$PHILODATADIR/databases");
++#	opendir(DIR, "/var/lib/philologic31/databases");
+ 	my @databases = grep(/^[^\.]/, readdir(DIR));
+ 	closedir(DIR);
+ 
+@@ -326,6 +329,8 @@
+ 		my $selected_string = '';
+ 		
+ 		if (-e "$PHILODATADIR/databases/$db/lib/philominesubs.pl") {
++#		if (-f '/var/lib/philologic/Makefile') {
++			&bugger($debug, "databases: $PHILODATADIR/databases/$db/lib/philominesubs.pl<br>");
+ 			if ($db eq $dbname) {
+ 				$selected_string = " selected";
+ 			} else {
+@@ -348,7 +353,7 @@
+ 
+ sub selectFromQuery() {	
+ 	
+-	$debug = 0;
++	$debug = 99;
+ 	
+ 	my $dbh = $_[0];
+ 	my $sql = $_[1];
+@@ -478,4 +483,4 @@
+ 
+ 
+ 
+-1;
+\ No newline at end of file
++1;
+diff -aur ../philomine2/cgi-bin/form_components/get_part.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/form_components/get_part.pl
+--- ../philomine2/cgi-bin/form_components/get_part.pl	2008-06-13 16:03:15.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/form_components/get_part.pl	2018-07-30 16:14:43.124276924 -0500
+@@ -10,7 +10,7 @@
+ &prepareParams(\%params);
+ &setParamsDefaults(\%params, \%defaults);
+ 
+-my $debug = 0;
++my $debug = 59;
+ 
+ print header;
+ 
+diff -aur ../philomine2/cgi-bin/instance_functions.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/instance_functions.pl
+--- ../philomine2/cgi-bin/instance_functions.pl	2008-06-13 16:03:18.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/instance_functions.pl	2018-08-13 18:50:17.566785273 -0500
+@@ -36,10 +36,10 @@
+ 	my $instances = $_[1];
+ 	my $corpus = $_[2];
+ 	my $classes_by_instance = $_[3];
+-	
++
+ 	my @sqlargs = ();
+ 	my $dbname = $params->{$corpus . '_dbname'};
+-	
++
+ 	# Load in the minefields and subminefields from the philimesubs in the appropriate
+ 	# philologic database directory
+ 	require "$PHILODATADIR/databases/$dbname/lib/philominesubs.pl";
+@@ -307,6 +307,7 @@
+ ################################################################################
+ sub instanceWordCountFilter() {
+ 
++
+ 	my $debug =0;
+ 
+ 	my $params = $_[0];
+@@ -336,7 +337,7 @@
+ 			if ($instances->[0] =~ /:/) {
+ 				# DIV level instances, or DOC-level with multiple divs		
+ 				my $count_file = $SYSTEM_DIR . '/' . $divtotalfiles{$featureset};
+-				&bugger($debug, "Instnace is div-level<br>");
++				&bugger($debug, "Instance is div-level<br>");
+ 				&bugger($debug, "Countfile: $count_file<br><br>");
+ 				open COUNTIN, $count_file;
+ 				while (my $line = <COUNTIN>) {
+@@ -349,7 +350,7 @@
+ 			} else {
+ 				# DOC level instances, no div criteria
+ 				my $count_file = $SYSTEM_DIR . '/' . $doctotalfiles{$featureset};
+-				&bugger($debug, "Instnace is doc-level, no div criteria<br>");
++				&bugger($debug, "Instance is doc-level, no div criteria<br>");
+ 				&bugger($debug, "Countfile: $count_file<br><br>");
+ 				open COUNTIN, $count_file;
+ 				while (my $line = <COUNTIN>) {
+Only in /var/www/artflsrv02/cgi-bin/perseus31/philomine2: instance_functions.pl.08.13.2018
+diff -aur ../philomine2/cgi-bin/perlbayes_functions.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/perlbayes_functions.pl
+--- ../philomine2/cgi-bin/perlbayes_functions.pl	2008-06-13 16:03:18.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/perlbayes_functions.pl	2018-08-13 15:59:02.254721868 -0500
+@@ -17,14 +17,17 @@
+ sub MultiBayes {
+ 
+ 	use Algorithm::NaiveBayes;
++	use Data::Dumper;
+ 
+-	my $debug = 20;
++	my $debug = 99;
+ 
+ 	my $params  = $_[0];
+ 	
+ 	my $runname = $params->{'runname'};
+ 	my $rundir =  $params->{'rundir'};
+ 
++	print $rundir;
++
+ 	# DIRECTORIES
+ 	# The directory for this mining function for this run
+ 	my $function_dir = "$rundir/PerlMultiBayes";
+@@ -148,6 +151,7 @@
+ 		}
+ 
+ 		my $nb = &trainPerlNaiveBayes(\%instance_data, \@training_instances, \@classes_by_instance_id, \@instances);
++#		print "(" . Dumper($nb) . ")";
+ 
+ 		# CLASSIFICATION
+ 		my $csv_file = '>/dev/null';
+@@ -165,6 +169,7 @@
+ 		print CLASSOUT '</div>';
+ 		close CLASSOUT;	
+ 		&printOutFile($classification_outfile);
++		&bugger($debug, "TEST" . $classification_outfile . "<br>");
+ 		close CSVOUT;
+ 	
+ 		# FEATURE STATS
+@@ -473,6 +478,7 @@
+ 		# We will raise 2 to the power of the feature probabilities -- not sure
+ 		# exactly why this particular form of scaling -- TODO look into what
+ 		# this is all about. Makes numbers prettier :) Something to do with logs.
++#		print Dumper($nb);
+ 		foreach my $feature_id (keys(%{$nb->{'model'}{'probs'}{$class}})) {
+ 			&bugger($debug, "Feature_id: $feature_id<br>");	
+ 			my $prob = sprintf("%.4f", (2 ** $nb->{'model'}{'probs'}{$class}{$feature_id}));
+@@ -526,7 +532,8 @@
+ 			$displayed_features++;
+ 			last if ($displayed_features > $params->{'FEATUREDISPLAYLIMIT'});
+ 			
+-			my $feature = $features->[$feature_id];
++#			my $feature = $features->[$feature_id];
++			my $feature = $features[$feature_id];
+ 			$features_string .= $feature . ' ';
+ 			
+ 			print FEATOUT "<tr>";
+@@ -569,7 +576,8 @@
+ 			$displayed_features++;
+ 			last if ($displayed_features > $params->{'FEATUREDISPLAYLIMIT'});
+ 
+-			my $feature = $features->[$feature_id];
++#			my $feature = $features->[$feature_id];
++			my $feature = $features[$feature_id];
+ 			$features_string .= $feature . ' ';
+ 			
+ 			print FEATOUT "<tr>";
+@@ -583,7 +591,7 @@
+ 		print FEATOUT "</table><br>";
+ 		print FEATOUT "</td></tr></table>";
+ 
+-		print FEATOUT $features_string;
++#		print FEATOUT $features_string;
+ 	}
+ 
+ 	print FEATOUT &closeFeatureListForm();
+diff -aur ../philomine2/cgi-bin/philomine2 /var/www/artflsrv02/cgi-bin/perseus31/philomine2/philomine2
+--- ../philomine2/cgi-bin/philomine2	2008-06-16 12:26:59.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/philomine2	2018-08-13 19:09:23.264348804 -0500
+@@ -8,6 +8,7 @@
+ use URI::Escape;
+ use POSIX qw(ceil floor);
+ use IO::Tee;
++use Data::Dumper;
+ 
+ # TODO what does this do?
+ no strict "refs";
+@@ -20,8 +21,8 @@
+ require "description_functions.pl";
+ require "utility_functions.pl";
+ require "form_components/function_data.pl";
+-require "/etc/philologic/dbnames";
+-require "/etc/philologic/philologic.cfg";
++require "/etc/philologic31/dbnames";
++require "/etc/philologic31/philologic31.cfg";
+ 
+ # Query param state saved via CGI.pm
+ my $state_filename = "/tmp/$$" . "_philomine_params.state";
+@@ -308,7 +309,7 @@
+ ################################################################################
+ sub WriteReQueryForm {
+ 	local ($arg, $var, $value);
+-        $thisformaction = "<form action=\"http://diderot.uchicago.edu/cgi-bin/philologic/philomine?";
++        $thisformaction = "<form action=\"http://artflsrv02.uchicago.edu/cgi-bin/perseus31/philomine2/philomine?";
+         $thisformaction .= "\" target='rerun'>";
+         print $thisformaction;
+ 	foreach $arg (@argbuffer) {
+@@ -583,7 +584,9 @@
+ 	my $vector = $_[0];
+ 	my $scalar = $_[1];
+ 	foreach $feature (keys(%$vector)) {
++#		print $vector->{$feature};
+ 		$vector->{$feature} = $vector->{$feature} * $scalar;
++#		print "\n$vector->{$feature}";
+ 	}
+ }
+ 
+@@ -661,9 +664,9 @@
+ 	my @old_classes_by_instance_id = @$classes_by_instance_id;
+ 	my @old_instances = @$instances;
+ 	%$corpora = ();
+-	@$instances = ();
+-	@$instance_descriptors = ();
+-	@$classes_by_instance_id = ();
++	@instances = ();
++	@instance_descriptors = ();
++	@classes_by_instance_id = ();
+ 	
+ 	foreach my $corpus (sort(keys(%old_corpora))) {
+ 		
+@@ -744,7 +747,7 @@
+ 	 	print INSTANCESOUT  '<td>' . $corpus_size . '</td>';
+ 	}
+  	print INSTANCESOUT  '<td>' . @$instances . '</td></tr>';
+-		
++
+ 	# FILTER the instances
+ 	&filterInstances($params, $corpora, $instances, *INSTANCESOUT);
+ 
+@@ -774,7 +777,8 @@
+ 	# Randomize the corpus assignments of the instances for a random falsification
+ 	# test.
+ 	if ($params{'SHUFFLE'}) {
+-		print INSTANCESOUT  &randomizeInstanceCorpora($params, $corpora);
++#		print INSTANCESOUT  &randomizeInstanceCorpora($params, $corpora);
++		print INSTANCESOUT  &randomizeInstanceClasses($params, $corpora);
+ 	}
+ 	print INSTANCESOUT '</div>';
+ 	close INSTANCESOUT;
+@@ -859,8 +863,12 @@
+ 			my $feature_id;
+ 
+ 			foreach $feature (keys(%feature_instance_counts)) {
+-				push(@$features, $feature);
+-				$feature_id = $#{@$features};
++#				push(@$features, $feature);
++				push(@features, $feature);
++#				print $feature . "\n";
++#				$feature_id = $#{@$features};
++				$feature_id = $#features;
++#				print #feature_id . "\n";
+ 				$all_ids_by_feature->{$feature} = $feature_id;
+ 			}
+ 			
+@@ -883,6 +891,7 @@
+ 					}
+ 				}
+ 			}
++#			print "[" . Dumper($all_ids_by_feature) . "]";
+ 
+ 			undef(%seen_instances);
+ 			undef(%instance_feature_values);
+Only in /var/www/artflsrv02/cgi-bin/perseus31/philomine2: philomine2.08132018.ok
+diff -aur ../philomine2/cgi-bin/philomine.formtemplate.html /var/www/artflsrv02/cgi-bin/perseus31/philomine2/philomine.formtemplate.html
+--- ../philomine2/cgi-bin/philomine.formtemplate.html	2008-06-13 16:03:18.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/philomine.formtemplate.html	2018-07-30 17:32:18.055404225 -0500
+@@ -14,7 +14,7 @@
+ 
+ <body>
+ 
+-    <form action="XXXFORMACTIONXXX" id="mine_form">
++    <form action="XXXFORMACTIONXXX/philomine2" id="mine_form">
+ 
+     <center>
+         <h2>PhiloMine: Classification and Statistical Functions</h2>
+diff -aur ../philomine2/cgi-bin/utility_functions.pl /var/www/artflsrv02/cgi-bin/perseus31/philomine2/utility_functions.pl
+--- ../philomine2/cgi-bin/utility_functions.pl	2008-06-13 16:03:17.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/utility_functions.pl	2018-08-11 19:03:41.918839826 -0500
+@@ -1,6 +1,6 @@
+ # Want debugging only for a specific routine? Change this variable to whatever
+ # you set $debug to in that routine. Usually should be 1.
+-$debug_true_value = 99;
++$debug_true_value = 1;
+ 
+ # Want every single debugging message to be displayed? If you only want some,
+ # try setting the local $debug variable inside a specific block.

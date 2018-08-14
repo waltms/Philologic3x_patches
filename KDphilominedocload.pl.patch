@@ -1,0 +1,46 @@
+--- /home/waltms/KDphilominedocload.pl	2010-04-23 17:13:34.000000000 -0500
++++ /var/lib/philologic31/databases/GreekDrama/philomineload/KDphilominedocload.pl	2018-08-13 18:43:01.191903216 -0500
+@@ -30,8 +30,8 @@
+ $ICONV2TREETAGGER = $ICONV . " -f utf-8 -t latin1 ";
+ $ICONVFROMTREETAGGER = $ICONV . " -f latin1 -t utf-8 ";
+ #     Normal stuff.....
+-$SORT = "/usr/bin/sort";
+-$GREP = "/usr/bin/grep";
++$SORT = "/bin/sort";
++$GREP = "/bin/grep";
+ #     List of directories to look for, etc.
+ @dirs = qw(tmp/ lemmas/ bigrams/ trigrams/ bilemmas/ trilemmas/);
+ #========================== End Configuration =========================
+@@ -54,11 +54,11 @@
+         #$SPLITONAPOSTROPHE = 1;    # Set on off....
+         #database preliminaries:
+         use DBI;		    # Set on off....
+-        $dsn = "dbi:mysql:perseus:localhost";
+-	$user = "perseus";
++        $dsn = "dbi:mysql:philologic:localhost";
++	$user = "philologic";
+ 	$pw = "martini";
+ 	#	Location of the sqlite greek lexicon database if loaded greektexts
+-	$greekdb = "/Library/WebServer/Lexica/GreekLexicon.db";
++	$greekdb = "/var/www/artflsrv02/cgi-bin/perseus/GreekLexicon.db";
+         }
+ else {
+         print "Usage: philominedocload -english/-french -1 \n";
+@@ -191,7 +191,7 @@
+                         }
+                 print " Read $x $type, kept $y $type.\n";
+                 close (INFILE);
+-                open (OUTFILE, ">", $file) or die "Error opening $file \n";
++#                open (OUTFILE, ">", $file) or die "Error opening $file \n";
+                 print OUTFILE $buffer;
+                 $buffer = "";
+                 }
+@@ -586,7 +586,7 @@
+ 	my $parse = $parsequery->fetchrow_hashref();
+ 	if ($parse->{lex}){
+ 		$lexid = $parse->{lex};
+-		$lemmaquery = $dbh->prepare("select lemma from Lexicon where id=\"$lexid\";");
++		$lemmaquery = $dbh->prepare("select lemma from Lexicon where lexid=\"$lexid\";");
+ 		$lemmaquery->execute();
+ 		$lemma = $lemmaquery->fetchrow_array();	
+ 	}

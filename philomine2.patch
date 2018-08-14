@@ -1,0 +1,95 @@
+--- /home/waltms/philomine2/cgi-bin/philomine2	2008-06-16 12:26:59.000000000 -0500
++++ /var/www/artflsrv02/cgi-bin/perseus31/philomine2/philomine2	2018-08-13 19:09:23.264348804 -0500
+@@ -8,6 +8,7 @@
+ use URI::Escape;
+ use POSIX qw(ceil floor);
+ use IO::Tee;
++use Data::Dumper;
+ 
+ # TODO what does this do?
+ no strict "refs";
+@@ -20,8 +21,8 @@
+ require "description_functions.pl";
+ require "utility_functions.pl";
+ require "form_components/function_data.pl";
+-require "/etc/philologic/dbnames";
+-require "/etc/philologic/philologic.cfg";
++require "/etc/philologic31/dbnames";
++require "/etc/philologic31/philologic31.cfg";
+ 
+ # Query param state saved via CGI.pm
+ my $state_filename = "/tmp/$$" . "_philomine_params.state";
+@@ -308,7 +309,7 @@
+ ################################################################################
+ sub WriteReQueryForm {
+ 	local ($arg, $var, $value);
+-        $thisformaction = "<form action=\"http://diderot.uchicago.edu/cgi-bin/philologic/philomine?";
++        $thisformaction = "<form action=\"http://artflsrv02.uchicago.edu/cgi-bin/perseus31/philomine2/philomine?";
+         $thisformaction .= "\" target='rerun'>";
+         print $thisformaction;
+ 	foreach $arg (@argbuffer) {
+@@ -583,7 +584,9 @@
+ 	my $vector = $_[0];
+ 	my $scalar = $_[1];
+ 	foreach $feature (keys(%$vector)) {
++#		print $vector->{$feature};
+ 		$vector->{$feature} = $vector->{$feature} * $scalar;
++#		print "\n$vector->{$feature}";
+ 	}
+ }
+ 
+@@ -661,9 +664,9 @@
+ 	my @old_classes_by_instance_id = @$classes_by_instance_id;
+ 	my @old_instances = @$instances;
+ 	%$corpora = ();
+-	@$instances = ();
+-	@$instance_descriptors = ();
+-	@$classes_by_instance_id = ();
++	@instances = ();
++	@instance_descriptors = ();
++	@classes_by_instance_id = ();
+ 	
+ 	foreach my $corpus (sort(keys(%old_corpora))) {
+ 		
+@@ -744,7 +747,7 @@
+ 	 	print INSTANCESOUT  '<td>' . $corpus_size . '</td>';
+ 	}
+  	print INSTANCESOUT  '<td>' . @$instances . '</td></tr>';
+-		
++
+ 	# FILTER the instances
+ 	&filterInstances($params, $corpora, $instances, *INSTANCESOUT);
+ 
+@@ -774,7 +777,8 @@
+ 	# Randomize the corpus assignments of the instances for a random falsification
+ 	# test.
+ 	if ($params{'SHUFFLE'}) {
+-		print INSTANCESOUT  &randomizeInstanceCorpora($params, $corpora);
++#		print INSTANCESOUT  &randomizeInstanceCorpora($params, $corpora);
++		print INSTANCESOUT  &randomizeInstanceClasses($params, $corpora);
+ 	}
+ 	print INSTANCESOUT '</div>';
+ 	close INSTANCESOUT;
+@@ -859,8 +863,12 @@
+ 			my $feature_id;
+ 
+ 			foreach $feature (keys(%feature_instance_counts)) {
+-				push(@$features, $feature);
+-				$feature_id = $#{@$features};
++#				push(@$features, $feature);
++				push(@features, $feature);
++#				print $feature . "\n";
++#				$feature_id = $#{@$features};
++				$feature_id = $#features;
++#				print #feature_id . "\n";
+ 				$all_ids_by_feature->{$feature} = $feature_id;
+ 			}
+ 			
+@@ -883,6 +891,7 @@
+ 					}
+ 				}
+ 			}
++#			print "[" . Dumper($all_ids_by_feature) . "]";
+ 
+ 			undef(%seen_instances);
+ 			undef(%instance_feature_values);
