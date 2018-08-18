@@ -805,7 +805,7 @@ diff -Nuar philomine2/cgi-bin/instance_functions.pl.08.13.2018 philomine2patched
 +1;
 diff -Nuar philomine2/cgi-bin/perlbayes_functions.pl philomine2patched/cgi-bin/perlbayes_functions.pl
 --- philomine2/cgi-bin/perlbayes_functions.pl	2008-06-13 16:03:18.000000000 -0500
-+++ philomine2patched/cgi-bin/perlbayes_functions.pl	2018-08-14 19:45:24.293978257 -0500
++++ philomine2patched/cgi-bin/perlbayes_functions.pl	2018-08-17 19:50:15.489906491 -0500
 @@ -17,14 +17,17 @@
  sub MultiBayes {
  
@@ -833,7 +833,22 @@ diff -Nuar philomine2/cgi-bin/perlbayes_functions.pl philomine2patched/cgi-bin/p
  		close CSVOUT;
  	
  		# FEATURE STATS
-@@ -447,7 +451,7 @@
+@@ -423,8 +427,12 @@
+ 
+ 	&bugger($debug, "Num instances: $num_instances correct: $correct_instances<br>");
+ 
+-	my $percent_correct = sprintf("%.2f", ($correct_instances / $num_instances) * 100); 
+-	my $percent_incorrect = sprintf("%.2f", ($incorrect_instances / $num_instances) * 100);
++	my $percent_correct = 0;
++	my $percent_incorrect = 0;
++	if ($num_instances > 0) {
++		$percent_correct = sprintf("%.2f", ($correct_instances / $num_instances) * 100); 
++		$percent_incorrect = sprintf("%.2f", ($incorrect_instances / $num_instances) * 100);
++	}
+ 
+ 	&bugger($debug, "Num instances: $num_instances correct: $correct_instances percent: $percent_correct<br>");
+ 	
+@@ -447,7 +455,7 @@
  	my $features = $_[3];
  	my $corpora = $_[4];
  	local (*FEATOUT) = $_[5];
@@ -842,7 +857,7 @@ diff -Nuar philomine2/cgi-bin/perlbayes_functions.pl philomine2patched/cgi-bin/p
  	# Feature Statistics Display
  	# Find the most highly scored features for each class (as judged by the ratio
  	# of the class probability to the sum of all other class probabilities for that
-@@ -526,7 +530,8 @@
+@@ -526,7 +534,8 @@
  			$displayed_features++;
  			last if ($displayed_features > $params->{'FEATUREDISPLAYLIMIT'});
  			
@@ -852,7 +867,7 @@ diff -Nuar philomine2/cgi-bin/perlbayes_functions.pl philomine2patched/cgi-bin/p
  			$features_string .= $feature . ' ';
  			
  			print FEATOUT "<tr>";
-@@ -569,7 +574,8 @@
+@@ -569,7 +578,8 @@
  			$displayed_features++;
  			last if ($displayed_features > $params->{'FEATUREDISPLAYLIMIT'});
  
@@ -862,7 +877,7 @@ diff -Nuar philomine2/cgi-bin/perlbayes_functions.pl philomine2patched/cgi-bin/p
  			$features_string .= $feature . ' ';
  			
  			print FEATOUT "<tr>";
-@@ -583,7 +589,7 @@
+@@ -583,7 +593,7 @@
  		print FEATOUT "</table><br>";
  		print FEATOUT "</td></tr></table>";
  
