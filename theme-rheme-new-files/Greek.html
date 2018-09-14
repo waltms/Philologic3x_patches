@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="Greek texts from the Perseus collection, for browsing and searching with PhiloLogic. Now with morphological searching.">
+ <meta name="keywords" content="Greek texts translations Perseus PhiloLogic Chicago morphological search parse 2009">
+ <link rel="stylesheet" href="perseus.css" type="text/css" />
+  <title>Greek Texts & Translations</title>
+  <script type="text/javascript" src="whizbang.js">
+  </script>
+</head>
+<body>
+  <div id="header">
+    <div id="top-bar">
+      <div class="region-content">
+<ul class="links secondary-links">
+			<li><a href="http://perseus.uchicago.edu/">HOME</a></li>
+<li><a href="about.html">ABOUT THIS RESOURCE</a></li>
+<li class="menu-124 first"><a href="http://www.perseus.tufts.edu/">PERSEUS DIGITAL LIBRARY AT TUFTS</a></li>
+
+<li class="menu-123"><a href="http://artfl-project.uchicago.edu/" title="">ARTFL PROJECT</a></li>
+<li class="menu-175"><a href="http://humanities.uchicago.edu/depts/classics/" title="">CLASSICS AT CHICAGO</a></li>
+
+</ul></div>
+      </div>
+    
+<div class="region-content">
+<h1><span class="site-name"><a href="">Greek Texts & Translations</a></span></h1>
+<ul class="links primary-links" style="float:left;">
+<li class="menu-115 first"><a href="GreekFrequency.html">frequency tables</a></li>
+<li class="menu-288"><a href="http://philologic.uchicago.edu/manual" target="blank" title="General Philologic user manual. First consult 'Info & Help' on this form, and the 'About this Resource' link at the top of this window">help</a></li>
+<li class="menu-298"><form action="/cgi-bin/perseus/citequery3.pl" style="margin:0px; padding-top:18px; padding-right:16px; padding-left:16px;" padding-left:16x;><input name="query" type="text" value="Hom. Il. 2.345" size="12"/><input type="hidden" name="dbname" value="GreekAug18" /><input type="submit" value="Citation Lookup" /></form> </li>
+
+
+</ul>
+
+</div>
+</div> <div style="clear:both;"></div><!-- /header -->
+
+      <table bgcolor="#ffffff" border="0" cellpadding="5" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td colspan="2" valign="top" width="100%">
+            <div class="searchbody">
+
+
+
+            <form action="/cgi-bin/perseus/search3torth" style="padding-top:0px; padding-right:12px; padding-left:12px; padding-left:16x; font-family:'Gill sans mt','Trebuchet MS',Helvetica,Tahoma,sans-serif;"> 
+		<input name="dbname" value="GreekAug18" type="hidden">
+              <div id="mainsearch">
+              <h2 style="color:#800000; font-family:'Gill sans mt','Trebuchet MS',Helvetica,Tahoma,sans-serif;">Search for Words or Phrases in Texts</h2>
+              <div id="maincontents" title="Leave this box blank if you are looking for particular texts by author or title."> <label for="word">Search for:</label>
+
+              <div id="basicform">
+              <fieldset title="Main Search"> <input name="word"
+ id="word" size="28" type="text" title="Enter a word or phrase. In this box, use complete words (e.g., 'μῆνιν'), or use * as a wild card (e.g., 'μῆν*'); leave this field blank if you are looking for particular texts by author or title. Consult Info & Help for pointers on morphological and lemmatized searching.">&nbsp;<input
+ id="resetbutton" value="Clear all" title="Click to start over with an empty form" type="reset">&nbsp;<input value="Search the Texts" title="Click to submit your query." type="submit"><br>
+Display: <input checked="checked" name="OUTPUT" value="conc" id="conc"
+ type="radio" title="Your results will be displayed with a few lines of context."> <label for="conc"> Context </label> <input
+ name="OUTPUT" value="kwic" id="kwic" type="radio" title="Your results will appear in one line each, with your search term in the center."> <label for="kwic">KWIC</label>
+              <input name="OUTPUT" value="SIMWORD" id="etsim"
+ type="radio" title="The system will suggest a word or a list of words spelled like your search term."> <label for="etsim">Similarity Search</label>
+
+              </fieldset>
+              </div>
+        <div>
+        <fieldset title="Main Search">
+            Orthography: 
+             <input checked="checked" name="ORTHMODE" type="radio" value="ORG" title="Give only fully accented Greek words; also use for any English word searches." />Full diacritics
+             <input  name="ORTHMODE" type="radio" value="MOD" title="Leave out accents, breathings and iota subscripts."> No diacritics
+             <input  name="ORTHMODE" type="radio" value="LEM" title="For transliteration details, see Info & Help. Do not use for English words!"> Transliteration
+        
+        </fieldset> </div>
+
+              </div>
+              <div id="searchopt">
+              <fieldset title="Search Options"> Search Context:<br>
+              <input checked="checked" name="CONJUNCT" value="PHRASE"
+ id="conjphr" type="radio" title="Only directly adjacent words will be searched for."> <label for="conjphr">Word or Phrase</label>
+              <input name="CONJUNCT" value="PROXY" id="conjpro"
+ type="radio" title="Specify the number of words that can intervene between your search terms."> <label for="conjpro">Phrase separated </label> <label
+ for="phrasedistance">by </label> <input name="DISTANCE" size="2"
+ value="3" id="phrasedistance"> words<br>
+
+Proximity Search in: <input name="CONJUNCT" value="6" id="cj6"
+ type="radio" title="Search within a sentence; the system will take punctuation, not grammar, to be indicative of sentence status."> <label for="cj6">Sentence</label> <input
+ name="CONJUNCT" value="5" id="cj5" type="radio" title="Note: Paragraph length varies widely from text to text; it depends at least in part on the whimsy of the text encoders."> <label for="cj5">Paragraph</label><br>
+              </fieldset>
+              </div>
+              <div id="mainbib"  title="You can use these bibliographic fields to find texts, but also to limit a word search to a particular author or work.">
+              <h2 style="color:#800000; font-family:'Gill sans mt','Trebuchet MS',Helvetica,Tahoma,sans-serif;">Find Texts in the Collection by Author or Title</h2>
+              <fieldset id="mainbibfs" title="Bibliographic">Bibliographic Search Fields:<br>
+
+              <label for="author" class="textfield">Author:</label><input
+ name="author" id="author" title="Enter (part of) an author's name; use the Show Options button to see what options are available." size="22"> <input name="xxbrowseauthor"
+ value="Show Options" title="Click to see possible authors" type="submit">
+              <div class="example">(e.g. 'Plato') <br>
+              </div>
+              <label for="title" class="textfield">Title:</label><input
+ name="title" id="title" title="Enter (part of) a title; use the Show Options button to see what options are available." size="22"> <input name="xxbrowsetitle"
+ value="Show Options" title="Click to see possible titles" type="submit">
+              <div class="example">(e.g. 'Meno')</div>
+              <br>
+
+              </fieldset>
+              </div>
+              </div>
+              <div id="query">
+              <h2 style="color:#800000; font-family:'Gill sans mt','Trebuchet MS',Helvetica,Tahoma,sans-serif !important;">Your query:</h2>
+              <div id="querytext">Type in any combination of criteria to formulate a new search. As you type in search fields, you will see a summary appear right here.<br><br>To see a full list of available texts, leave all fields blank and hit 'Search the Texts'.<br> <br>To go directly to a particular text or passage, you can enter a citation in the 'Citation Lookup' box above.<br><br>Consult Info & Help below for further hints.</div>
+
+              </div>
+              <div id="nav">
+              <ul id="navlister">
+                <li id="bibfieldsli" title="Narrow down your search by language,.."><a href="#bibfields">More
+Bibliographic Search
+Fields</a> </li>
+                <li id="resultformatli" title="Search for frequency data, collocations, KWIC reports.."><a href="#resultformat">Refined
+Search
+Results</a> </li>
+                <li id="textobjsli" title="Search for speakers, (sub)sections by title, and other specific parts of larger documents"><a href="#textobjs">Text Object
+Search Fields</a> </li>
+
+                <li id="infoli" title="Hints on what's possible for users and wannabe 'power users'"><a href="#info">Info &amp; Help</a> </li>
+              </ul>
+              </div>
+              <div class="toggle">
+              <div class="toggleable">
+              <div id="info"> <a name="infoname">Philologic
+Information and Help</a><br \="">
+
+              <br \="">
+Welcome to <a href="http://philologic.uchicago.edu">Philologic</a>.
+Here are some tips to make your visit more productive:
+              <ul>
+              <li><a name"infoname">Morphology and Lemmatization</a>: You can now search by morphological characteristics and by lemmatized form. Do this with the formula pos: or lemma: E.g., pos:v*3spia* will find verb forms in the 3sg, present indicative active; lemma:λέγω will find instances of the verb λέγω (in our implementation this includes εἶπον, by the way). New: An easier way of searching is with the form: query. Write out your morphological attributes without having to worry about dashes and asterisks, e.g., form:perfect-active-optative or form:perf-act-opt or form:act-opt-perfect</li>
+              <li>A quick <a name"infoname">overview of part-of-speech codes:</a> <br>
+slot 1: major part of speech: <a name"infoname">v</a>erb, <a name"infoname">n</a>oun, <a name"infoname">a</a>djective, <a name"infoname">p</a>ronoun, a<a name"infoname">d</a>verb, <a name"infoname">c</a>onjunction, p<a name"infoname">r</a>eposition, <a name"infoname">g</a>= particle,.. <br>
+slot 2: minor part of speech: n<a name"infoname">e</a> proper name (also: ae, de for proper-name adjectives and adverbs based on proper names), p<a name"infoname">s</a> possessive pronoun, gm modal particle, pa definite article. Further examples: .c =copula .d = demonstrative, .i=interrogative, .r = relative, .s= possessive, .x=indefinite.  <br>
+slot 3: person (1, 2, 3)<br>
+slot 4: number (s, p, <a name"infoname">d</a>ual)<br>
+slot 5: tense (p, <a name"infoname">i</a>mperfect, <a name"infoname">a</a>orist, <a name"infoname">f</a>uture, pe<a name"infoname">r</a>fect, p<a name"infoname">l</a>uperfect, fu<a name"infoname">t</a>ure perfect)<br>
+slot 6: mood (i, s, o, i<a name"infoname">m</a>perative, <a name"infoname">p</a>articiple, i<a name"infoname">n</a>finitive)<br>
+slot 7: voice (a, m, p, e: middle-passive)<br>
+slot 8: gender (m, f, n, c: common gender)<br>
+slot 9: case (n, g, d, a, v)<br>
+slot 10: degree (c, s)<br><br>
+<a name"infoname">Sample searches</a> (using asterisk as a wild card, hyphens for single empty slots): <br>pos:v*ana* : for a verb in the aorist infinitive active<br>
+pos:pp* for personal pronouns;
+<br>
+pos:dd* for demonstrative adverbs.<br>lemma:δοκέω;pos:v-3s* (3rd singular forms of δοκέω); lemma:δοκέω;pos:v-3s* pos:*d- (same, followed by something in dative case). Do note that this system has <a name"infoname">no syntax</a> whatsoever; it purely searches for morphological characteristics! The datives you see may not 'go with' the forms of δοκέω at all. 
+<br><br></li>
+               <li> We now have more so-called <a name"infoname">Tooltips</a> on the search form. Hover over a box with your mouse, wait a moment, and you may get helpful information. In Firefox, you can install an 'add-on' called Long Titles to make the full text of these tips display.</li>
+               <li><a name"infoname">Show Options:</a> Clicking on the "Show Options" buttons gives you a listing of all the possibilities for the search field in this database. Please be patient; some of these take a few moments to generate. 'Show Options' does <i>not</i> execute a search; it merely lists a number of possibilities for you to enter in the adjoining search field.
+             </li> 
+              <li>For bibliographic fields, the Show Options function is <a name"infoname">dynamic</a>: if you have already selected Plautus as your Author and proceed to click on Show Options next to the Title field, you will see titles by Plautus only.</li>
+
+               <li><a name"infoname">'Text object'</a> is an umbrella term for both structural parts of texts (chapters, sections, notes) as well as less conventional units, such as character text. These fields allow you to limit your search to textual notes, or to a particular character in comedy.</li>
+				<li>For pattern matching one may employ <a name"infoname">wildcard characters </a> (e.g., <i>widow*</i>
+retrieves widow, widowe, widowhood, etc.). Wild cards are not necessary outside the main search field. In the author field, 'Xen', 'Xen*', 'noph', etc. all find Xenophon. For fuller explanations, please consult the Philologic manual.</li>
+               <li>You can look up <a name"infoname">parses and associated dictionary entries</a> by clicking on any Greek word. If this does not result in anything, you may have blocked pop-up windows. </li>
+
+                <li>In case you are looking for the morphological analysis of a word that does not appear on the page, you may want to use the parse box on our home page instead.</li>
+                  <li>In the <a name"infoname">bibliographic</a> search fields, try to enter as little information as possible. 'Xen' suffices to get you to Xenophon.</li>
+                    <li>Philologists: Check out the refined search results. Here you can tweak the <a name"infoname">KWIC</a> settings, for instance.</li>
+                      <li>Narratologists: Check out the Text Object Search fields. Here you can enter a character's name and search only in that character's speech (fully implemented in Greek texts of tragedy and comedy).</li>
+
+                  <li>Text Objects are also handy if you are looking for Demosthenes on the Crown and don't remember the number of the speech. Simply enter 'crown' or 'Στεφ' --NB: Greek is accent and case-sensitive here.</li>
+              <li>On the results pages, we have included a link to <a name"infoname">report problems and errors.</a> If you find anything from a misplaced accent to a missing chunk of text, or if you have suggestions for improvement, please let us know.</li>
+              <li><a name"infoname">Terms:</a> Clicking on the "Terms" buttons gives you a listing of all the possibilities for the search field in this database. Please be patient; some of these take a few moments to generate.
+             </li> 
+             <li>No results when you fully expected them?  
+           You may need to hit the 'Clear' button to make sure you do not have hidden criteria from a previous search. Also, make sure that your typed input matches the radio button for full diacritics (and all English input); no diacritics; or transliteration.</li>
+           <li><a name"infoname">Transliteration</a>: Here's the Greek alphabet in Greek and corresponding transliteration: αa βb γg δd εe ζz ηh θq ιi κk λl μm νn ξc o πp ρr σs τt υu φf χx ψy ωw.</li>
+
+           <li><a name"infoname">Similarity searching:</a> Remember, you know more Greek than a computer does. Your mileage may vary, but you will probably find this option most useful for searching the English translations.</li>
+                </ul>
+
+              </div>
+              </div>
+              <div class="toggleable">
+              <div id="resultformat">
+              <fieldset title="Refined Search Results"> <a
+ name="resultformat">Refined
+Search Results</a><br>
+<!--<input checked="checked" name="OUTPUT" type="radio"
+              value="conc" id="conc" /> <label for="conc">Occurrences with Context (default)</label>
+              <input name="OUTPUT" type="radio" value="kwic" id="kwic"/>
+              <label for="kwic">Occurrences Line by Line [KWIC]</label><br>-->
+              <input name="OUTPUT" id="OUTPUTTF" value="TF" type="radio">
+              <label for="OUTPUTTF">Frequency by Title</label> <input
+ name="OUTPUT" id="OUTPUTTFR" value="TFRATE" type="radio"> <label
+ for="OUTPUTTFR">Frequency
+by Title per 10,000</label><br>
+
+              <input name="OUTPUT" id="OUTPUTAF" value="AF" type="radio">
+              <label for="OUTPUTAF">Frequency by Author</label> <input
+ name="OUTPUT" id="OUTPUTAFR" value="AFRATE" type="radio"> <label
+ for="OUTPUTAFR">Frequency
+by Author per 10,000</label> [<label for="AFTITLEDISP">Check </label> <input
+ name="AFTITLEDISP" id="AFTITLEDISP" value="OFF" type="checkbox"> to
+hide titles]<br>
+              <!--<input name="OUTPUT" id="OUTPUTDF" value="DF" type="radio">
+              <label for="OUTPUTDF">Frequency by Years</label> <input
+ name="OUTPUT" id="OUTPUTDFR" value="DFRATE" type="radio"> <label
+ for="OUTPUTDFR">Frequency
+by Years per 10,000</label><br>
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="DFPERIOD">Select
+Year Group</label>
+              <select name="DFPERIOD" id="DFPERIOD">
+              <option value="0" id="groupyear"> Year </option>
+              <option selected="selected" value="1" id="groupdecade">Decade
+              </option>
+              <option value="2" id="groupqcent"> Quarter Cent. </option>
+              <option value="3" id="grouphcent"> Half Cent. </option>
+              <option value="4" id="groupcent"> Century </option>
+              </select>
+              <label for="DFTITLEDISP">[Check </label><input
+ name="DFTITLEDISP" id="DFTITLEDISP" value="OFF" type="checkbox"> to
+hide titles]<br>
+              <input name="OUTPUT" id="OUTPUTHEAD" value="freqbyhead"
+ type="radio"> <label for="OUTPUTHEAD">Frequency by Div Object
+(Headword in
+Dictionaries)</label><br>-->
+              <input name="OUTPUT" id="OUTPUTPF" value="PF" type="radio">
+
+              <label for="OUTPUTPF">Collocation Table</label> <label
+ for="POLESPAN">Spanning</label>
+              <select name="POLESPAN" id="POLESPAN">
+              <option> 10 </option>
+              <option> 9 </option>
+              <option> 8 </option>
+
+              <option> 7 </option>
+              <option> 6 </option>
+              <option selected="selected"> 5 </option>
+              <option> 4 </option>
+              <option> 3 </option>
+
+              <option> 2 </option>
+              <option> 1 </option>
+              </select>
+words. <label for="SEARCHBY">Use Lemmas:</label><input type="checkbox" name="SEARCHBY" id="SEARCHBY" value="lemma"/>
+<label for="POLEFILTER">Turn Filter Off:</label> <input
+ name="POLEFILTER" id="POLEFILTER" value="OFF" type="checkbox"> <a
+ href="#">Filtered Words</a><br>
+              <input name="OUTPUT" id="OUTPUTTR" value="THMRHM"
+ type="radio"> <label for="OUTPUTTR">Word in Clause Position
+(Theme-Rheme) Display</label> <label for="THMPRTLIMIT">Options:</label>
+
+              <select name="THMPRTLIMIT" id="THMPRTLIMIT">
+              <option value="1"> Front of Clause Only </option>
+              <option value="2"> Last of Clause Only </option>
+              <option value="3"> Front and Last Only </option>
+              <option value="4"> Front, Last, Middle </option>
+              <option value="5"> Full Report </option>
+
+              </select>
+              <br>
+              <input name="OUTPUT" id="OUTPUTSK" value="SORTEDKWIC"
+ type="radio"> <label for="OUTPUTSK">Line by Line (KWIC) Sorted by
+keyword</label> <label for="KWSS">and word to its</label>
+              <select name="KWSS" id="KWSS">
+              <option value="1" selected="selected"> Right </option>
+              <option value="2"> Left </option>
+
+              </select>
+              <label for="KWSSPRLIM">Display up to </label>
+              <select name="KWSSPRLIM" id="KWSSPRLIM">
+              <option value="500" selected="selected"> 500 </option>
+              <option value="1000"> 1000 </option>
+              <option value="2000"> 2000 </option>
+
+              <option value="5000"> 5000 </option>
+              <option value="10000"> 10000 </option>
+              </select>
+occurrences.<br>
+              <input name="OUTPUT" value="TRSORT" id="TRSORT"
+ type="radio"><label for="TRSORT"> Sort by bibiliographic information</label>,
+              <label for="trsortorder">order by:</label>
+
+              <select name="trsortorder" id="trsortorder" size="1">
+              <option value="author, title"> Author, Title </option>
+              <option value="author, date"> Author, Year of Publication
+              </option>
+              <option value="title, author"> Title, Author </option>
+              <option value="date, author"> Year of Publication, Author
+              </option>
+
+              </select>
+              <br>
+              <br>
+<!--Return to: <input name="OUTPUT" id="OUTPUTCONC" type="radio" value=
+              "conc" /> <label for="OUTPUTCONC">Occurrences with Context</label> or <input name=
+              "OUTPUT" id="OUTPUTKWIC" type="radio" value="kwic" /> <label for="OUTPUTKWIC">Occurrences
+              Line by Line</label>-->
+              <script src="history.js"></script><br>
+              </fieldset>
+              </div>
+              </div>
+              <div class="toggleable">
+
+              <div id="bibfields">
+              <fieldset title="Bibliographic Fields"> <a name="bibfieldsname">Bibiliographic
+Search Fields</a>
+              <p>Find documents or limit word searches (use AND, OR,
+and NOT).</p>
+             
+              <label for="editor" class="textfield">Editor:</label><input
+ name="editor" id="editor" size="35"> <input name="xxbrowseeditor"
+ value="Show Options" type="submit">
+              <div class="example">(e.g. 'Steven J. Willett')</div>
+              <br>
+
+              <label for="pubdate" class="textfield">Pubdate:</label><input
+ name="pubdate" id="pubdate" size="35"> <input name="xxbrowsepubdate"
+ value="Show Options" type="submit">
+              <div class="example">(e.g. '1899')</div>
+              <br>
+              <label for="language" class="textfield">Language:</label><input
+ name="language" id="language" size="35"> <input
+ name="xxbrowselanguage" value="Show Options" type="submit">
+              <div class="example">(e.g. 'Greek')</div>
+              <br>
+
+              <label for="shrtcite" class="textfield">Shrtcite:</label><input
+ name="shrtcite" id="shrtcite" size="35"> <input
+ name="xxbrowseshrtcite" value="Show Options" type="submit">
+              <div class="example">(e.g. 'HesiodShieldGr')</div>
+              <br>
+       <label for="filename" class="textfield">Filename:</label><input
+ name="filename" id="filename" size="35"> <input
+ name="xxbrowsefilename" value="Show Options" type="submit">
+              <div class="example">(e.g. '1999.02.0042.xml')</div>
+              <br>
+
+              <label for="genre" class="textfield">Genre:</label><input
+ name="genre" id="genre" size="35" title="May 2008: this is not yet implemented for the Greek texts. Come back soon, but in the meantime do not use this box."> <input
+ name="xxbrowsegenre" value="Show Options" type="submit">
+              <div class="example">(e.g. 'comedy')</div>
+              <br>
+              <br>
+One may also use the bibliographic fields on their own to find
+documents and sort the results.<br>
+              <label for="sortorder">Sort bibliographic searches only
+by:</label>
+              <select name="sortorder" id="sortorder" size="1">
+
+              <option value="author, title"> Author, Title </option>
+              <option value="author, date"> Author, Year of Publication
+              </option>
+              <option value="title, author"> Title, Author </option>
+              <option value="date, author"> Year of Publication, Author
+              </option>
+              </select>
+
+              </fieldset>
+              </div>
+              </div>
+              <div class="toggleable">
+              <div id="textobjs">
+              <fieldset title="Text Objects"> <a name="textobjsname">Text
+Object Search Fields</a><br>
+              <br>
+Find documents or limit word searches (use OR only).<br>
+
+              <br>
+              <b>Div Objects</b> <br>
+              <label for="dgdivhead" class="textfield">Head:</label><input
+ name="dgdivhead" id="dgdivhead" size="35" title="Use this field to search titles of parts of larger works, such as titles of speeches."> <input name="yybrowsedgdivhead" value="Show Options" type="submit">
+              <div class="example">(e.g. 'To Nicocles')</div>
+              <br>
+              <label for="dgdivtype" class="textfield">Type:</label><input
+ name="dgdivtype" id="dgdivtype" size="35" title="Use this field to search types of structural parts of larger works, such as letters or notes. Using 'NOT notes' excludes all notes, including textual notes, from your search."> <input
+ name="yybrowsedgdivtype" value="Show Options" type="submit">
+
+              <div class="example">(e.g. 'choral' or 'NOT notes')</div>
+              <br>
+              <br>
+              <b>SubDiv Objects:</b><br><br>
+              Use Who: to find text spoken by characters you specify. <br>
+              <label for="dgsubdivwho" class="textfield">Who:</label><input
+ name="dgsubdivwho" id="dgsubdivwho" size="35"  title="Enter a character name to search for text spoken by that character, or to limit a word search to text spoken by that character. (May 2008) This is implemented for the Greek texts of tragedy and comedy."> <input
+ name="zzbrowsedgsubdivwho" value="Terms" type="submit">
+
+              <div class="example">(e.g. 'Μήδεια')</div>
+              <br><label for="dgsubdivn" class="textfield">N:</label><input
+ name="dgsubdivn" id="dgsubdivn" size="35"> <input
+ name="zzbrowsedgsubdivn" value="Terms" type="submit">
+              <div class="example">(e.g. 'Atossa')</div>
+              <br>
+              <label for="dgsubdivtag" class="textfield">Tag:</label><input
+ name="dgsubdivtag" id="dgsubdivtag" size="35"> <input
+ name="zzbrowsedgsubdivtag" value="Show Options" type="submit">
+              <div class="example">(e.g. 'note')</div>
+
+              <br>
+              <label for="dgsubdivtype" class="textfield">Type:</label><input
+ name="dgsubdivtype" id="dgsubdivtype" size="35"> <input
+ name="zzbrowsedgsubdivtype" value="Show Options" type="submit">
+              <div class="example">(e.g. 'iamb')</div>
+              <br>
+              
+              
+              </fieldset>
+              </div>
+              </div>
+
+              <div id="foot"> 
+<br/>
+<a
+ href="http://artfl-project.uchicago.edu"><img
+ style="border: 0pt none ;" src="/philologic/philopowered.png"
+ alt="Powered by PhiloLogic"></a> </div>
+              </div>
+            </form>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10153248-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

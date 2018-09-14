@@ -1,0 +1,24 @@
+--- mkheaders.plin.orig	2018-09-02 00:21:49.329932830 +0000
++++ mkheaders.plin	2018-09-14 23:42:29.480408987 +0000
+@@ -30,17 +30,16 @@
+ 
+ while ( <IN> )
+ {
+-    chop; 
+-    split; 
+-
+-    $id = $_[0];
++    chop;
++    @v = split(' ', $_);
++    
++    $id = $v[0];
+     $o = $ho; 
+ 
+     open H, ">temp-" . $tag . "/header." . $id || die "cannot open header." . $id; 
+ 
+     for $ob ( @ARGV )
+     {
+-
+ 	$u = $ob eq "page" || $ob eq $ARGV[$#ARGV] ? 1 : 2;
+ 
+ 	print STDERR "packing " . $ob . "...\n";

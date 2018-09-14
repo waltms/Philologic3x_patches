@@ -1,0 +1,27 @@
+--- split.plin.orig	2018-09-11 00:08:09.311443358 +0000
++++ split.plin	2018-09-11 00:09:45.950433390 +0000
+@@ -60,18 +60,18 @@
+ 
+         $k++;
+ #	print OUTFILE $_;
+-	split;
++	@v = split(' ', $_);
+ 
+-	$howmany = ($#_ - 1) / 2;
++	$howmany = ($#v - 1) / 2;
+ 
+ 	$offset = 0;
+ 
+ 	for ($l=0; $l<$howmany; $l++)
+ 	  {
+-	    print OUTFILE $_[0] . " ";
+-	    print OUTFILE $_[1] . "/" . $_[2 + 2 * $l] . " ";
+-	    print OUTFILE $offset . " " . $_[3 + 2 * $l] . "\n";
+-	    $offset += $_[3 + 2 * $l];
++	    print OUTFILE $v[0] . " ";
++	    print OUTFILE $v[1] . "/" . $v[2 + 2 * $l] . " ";
++	    print OUTFILE $offset . " " . $v[3 + 2 * $l] . "\n";
++	    $offset += $v[3 + 2 * $l];
+ 	  }
+ 	
+       }

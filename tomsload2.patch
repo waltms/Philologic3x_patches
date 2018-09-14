@@ -1,0 +1,55 @@
+--- tomsload2.plin.orig	2018-09-02 00:21:49.329932830 +0000
++++ tomsload2.plin	2018-09-14 23:04:37.096941830 +0000
+@@ -34,9 +34,10 @@
+ 
+ while ( <I> )
+ {
+-    chop; split; 
++    chop;
++    @v = split(' ', $_);
+ #    push ( @ofs, $_[$#_] ); 
+-    $ofs[$_[0]] = $_[$#_];
++    $ofs[$v[0]] = $v[$#_];
+ }
+ 
+ close I; 
+@@ -46,30 +47,30 @@
+ 
+ while (<>)
+ {
+-    chop; 
+-    split; 
++    chop;
++    @v = split(' ', $_);
+ 
+-    if ( $_[0] eq $p )
++    if ( $v[0] eq $p )
+     {
+-	if ( $_[1] != $last )
++	if ( $v[1] != $last )
+ 	{
+-	    if ( $_[1] )
++	    if ( $v[1] )
+ 	    {
+ 		&pack3 ($ofs[$last], 0);
+ 		close OUT;
+ 	    }
+ 
+-	    $tmpf = ">temp-" . $tag . "/objects." . $p . "." . $_[1];
++	    $tmpf = ">temp-" . $tag . "/objects." . $p . "." . $v[1];
+ 	    open OUT, $tmpf;
+ 
+-	    $last = $_[1];
++	    $last = $v[1];
+ 	    $cc = 0; 
+ 	}
+ #	print $_[$#_] . " " . $cc . "\n";
+-	&pack3 ($_[$#_], $cc);
++	&pack3 ($v[$#v], $cc);
+     }
+ 
+-    elsif ( $_[0] eq $c )
++    elsif ( $v[0] eq $c )
+     {
+ 	$cc++;
+     }
